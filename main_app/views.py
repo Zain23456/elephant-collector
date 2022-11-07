@@ -1,6 +1,11 @@
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
 from .models import Elephant
 
+class ElephantCreate(CreateView):
+  model = Elephant
+  fields = '__all__'
+  # fields = ['name', 'description']
 
 # Create your views here.
 def home(request):
