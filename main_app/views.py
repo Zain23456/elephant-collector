@@ -6,6 +6,7 @@ class ElephantCreate(CreateView):
   model = Elephant
   fields = '__all__'
   # fields = ['name', 'description']
+  success_url = '/elephants/'
 
 # Create your views here.
 def home(request):
