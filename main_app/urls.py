@@ -9,4 +9,5 @@ urlpatterns = [
   path('elephants/create/', views.ElephantCreate.as_view(), name='elephants_create'),
   path('elephants/<int:pk>/update/', views.ElephantUpdate.as_view(), name='elephants_update'),
   path('elephants/<int:pk>/delete/', views.ElephantDelete.as_view(), name='elephants_delete'),
+  path('elephants/<int:elephant_id>/add_feeding/', views.add_feeding, name='add_feeding')
 ]
