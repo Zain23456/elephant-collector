@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Elephant
+from .forms import FeedingForm
 
 class ElephantCreate(CreateView):
   model = Elephant
@@ -29,4 +30,5 @@ def elephants_index(request):
 
 def elephants_detail(request, elephant_id):
   elephant = Elephant.objects.get(id=elephant_id)
-  return render(request, 'elephants/detail.html', { 'elephant': elephant })
+  feeding_form = FeedingForm()
+  return render(request, 'elephants/detail.html', { 'elephant': elephant, 'feeding_form': feeding_form })
