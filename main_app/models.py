@@ -19,7 +19,7 @@ class Elephant(models.Model):
       return reverse("elephants_detail", kwargs={"elephant_id": self.id})
 
 class Feeding(models.Model):
-  date = models.DateField()
+  date = models.DateField('Feeding Date')
   meal = models.CharField(max_length=1, choices=MEALS, default=MEALS[0][0])
   elephant = models.ForeignKey(Elephant, on_delete=models.CASCADE)
 
