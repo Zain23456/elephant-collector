@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Elephant
 from .forms import FeedingForm
@@ -32,3 +32,11 @@ def elephants_detail(request, elephant_id):
   elephant = Elephant.objects.get(id=elephant_id)
   feeding_form = FeedingForm()
   return render(request, 'elephants/detail.html', { 'elephant': elephant, 'feeding_form': feeding_form })
+
+def add_feeding(request, elephant_id):
+  form = FeedingForm(request.POST)
+  if form.is_valid():
+    new_feeding = form.save(commit=False)
+    new_feeding.elephant_id = elephant_id
+    new_feeding.save()
+  return redirect('elephants_detail', elephant_id=elephant_id)
