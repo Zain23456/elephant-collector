@@ -59,6 +59,7 @@
     </form>
 
     <h3>Past Feedings</h3>
+    {% if elephant.feeding_set.all.count %}
     <table>
       <thead>
         <tr><th>Date</th><th>Meal</th></tr>
@@ -72,6 +73,11 @@
         {% endfor %}
       </tbody>
     </table>
+    {% else %}
+      <div class="subsection-content">
+        <p>{{elephant.name}} has never been fed</p>
+      </div>
+    {% endif %}
   </section>
 </div>
 
