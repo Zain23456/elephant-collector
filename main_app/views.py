@@ -12,3 +12,7 @@ def about(request):
 def elephants_index(request):
   elephants = Elephant.objects.all()
   return render(request, 'elephants/index.html', { 'elephants': elephants })
+
+def elephants_detail(request, elephant_id):
+  elephant = Elephant.objects.get(id=elephant_id)
+  return render(request, 'elephants/detail.html', { 'elephant': elephant })

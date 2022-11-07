@@ -17,6 +17,7 @@
 
 <section class="card-container">
   {% for elephant in elephants %}
+  <a href="/elephants/{{ elephant.id }}">
     <div class="card">
       <div class="card-content">
         <div class="card-img-container">
@@ -28,6 +29,7 @@
         <h2 class="card-title">{{ elephant.name }}</h2>
         <p><small>{{ elephant.description }}</small></p>
       </div>
+    </a>
     </div>
   {% endfor %}
 </section>
