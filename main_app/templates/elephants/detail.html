@@ -21,6 +21,10 @@
   <div class="elephant-details">
     <h1>{{ elephant.name }}</h1>
     <p>{{ elephant.description }}</p>
+    <div class="elephant-actions">
+      <a href="{% url 'elephants_update' elephant.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'elephants_delete' elephant.id %}" class="btn danger">Delete</a>
+    </div>
   </div>
 </section>
 
