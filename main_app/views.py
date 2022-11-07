@@ -1,11 +1,19 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Elephant
 
 class ElephantCreate(CreateView):
   model = Elephant
   fields = '__all__'
   # fields = ['name', 'description']
+  success_url = '/elephants/'
+
+class ElephantUpdate(UpdateView):
+  model = Elephant
+  fields = ['description']
+
+class ElephantDelete(DeleteView):
+  model = Elephant
   success_url = '/elephants/'
 
 # Create your views here.
