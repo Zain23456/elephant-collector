@@ -3,6 +3,16 @@
 
 {% block head %}
 <link 
+  href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css" 
+  rel="stylesheet" 
+/>
+<link rel="stylesheet" href="{% static 'css/mcdp.css' %}">
+<script 
+  src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"
+>
+</script>
+
+<link 
   rel="stylesheet" 
   type="text/css" 
   href="{% static 'css/elephants/elephant-detail.css' %}"
@@ -44,7 +54,7 @@
       {{ feeding_form.as_p }}
       <button type="submit" class="btn submit">Add Feeding</button>
     </form>
-    
+
     <h3>Past Feedings</h3>
     <table>
       <thead>
