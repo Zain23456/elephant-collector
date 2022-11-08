@@ -49,8 +49,9 @@ def elephants_index(request):
 
 def elephants_detail(request, elephant_id):
   elephant = Elephant.objects.get(id=elephant_id)
+  toys_elephant_doesnt_have = Toy.objects.exclude(id_in = elephant.toys.all().values_list('id'))
   feeding_form = FeedingForm()
-  return render(request, 'elephants/detail.html', { 'elephant': elephant, 'feeding_form': feeding_form })
+  return render(request, 'elephants/detail.html', { 'elephant': elephant, 'feeding_form': feeding_form, 'toys': toys_elephant_doesnt_have })
 
 def add_feeding(request, elephant_id):
   form = FeedingForm(request.POST)
