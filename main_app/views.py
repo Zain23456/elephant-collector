@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Elephant
+from .models import Elephant, Toy
 from .forms import FeedingForm
 
 class ElephantCreate(CreateView):
@@ -16,6 +16,10 @@ class ElephantUpdate(UpdateView):
 class ElephantDelete(DeleteView):
   model = Elephant
   success_url = '/elephants/'
+
+class ToyCreate(CreateView):
+  model = Toy
+  fields = '__all__'
 
 # Create your views here.
 def home(request):
