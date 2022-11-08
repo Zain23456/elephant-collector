@@ -27,7 +27,15 @@ class ToyList(ListView):
 
 class ToyDetail(DetailView):
   model = Toy
-  
+
+class ToyUpdate(UpdateView):
+  model = Toy
+  fields = ['name', 'color']
+
+class ToyDelete(DeleteView):
+  model = Toy
+  success_url = '/toys/'
+
 # Create your views here.
 def home(request):
   return render(request, 'home.html')
