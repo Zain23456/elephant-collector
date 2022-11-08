@@ -60,3 +60,7 @@ def add_feeding(request, elephant_id):
     new_feeding.elephant_id = elephant_id
     new_feeding.save()
   return redirect('elephants_detail', elephant_id=elephant_id)
+
+def assoc_toy(request, elephant_id, toy_id):
+  Elephant.objects.get(id=elephant_id).toys.add(toy_id)
+  return redirect('elephants_detail', elephant_id=elephant_id)
