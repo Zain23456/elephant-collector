@@ -6,8 +6,8 @@ from .forms import FeedingForm
 
 class ElephantCreate(CreateView):
   model = Elephant
-  fields = '__all__'
-  # fields = ['name', 'description']
+  # fields = '__all__'
+  fields = ['name', 'description']
   success_url = '/elephants/'
 
 class ElephantUpdate(UpdateView):
