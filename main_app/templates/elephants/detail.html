@@ -25,10 +25,18 @@
 
 <section class="elephant-container">
   <div class="elephant-img">
+    {% if elephant.photo.url %}
+      <img 
+        src="{{elephant.photo.url}}" 
+        alt="A photo of {{elephant.name}}"
+        class="usr-img"
+      >
+    {% else %}
     <img 
       src="" 
       alt="A cute elephant"
     >
+    {% endif %}
   </div>
   <div class="elephant-details">
     <h1>{{ elephant.name }}</h1>
