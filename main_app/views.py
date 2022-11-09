@@ -6,8 +6,13 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Elephant, Toy
+from .models import Elephant, Toy, Photo
 from .forms import FeedingForm
+import uuid
+import boto3
+
+S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
+BUCKET = 'honeybee-cheese-elephant-collector'
 
 class ElephantCreate(CreateView, LoginRequiredMixin):
   model = Elephant
@@ -91,3 +96,20 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'signup.html', context)
+
+def add_photo(request, elephant_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Photo(url=url, elephant_id=elephant_id)
+      elephant_photo = Photo.objects.filter(elephant_id=elephant_id)
+      if elephant_photo.first():
+        elephant_photo.first().delete()
+      photo.save()
+    except Exception as err:
+      print('An error occurred uploading file to S3: %s' % err)
+  return redirect('cats_detail', elephant_id=elephant_id)
