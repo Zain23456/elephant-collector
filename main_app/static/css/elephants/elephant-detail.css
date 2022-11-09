@@ -11,6 +11,10 @@
   max-width: 350px;
 }
 
+.elephant-img > img {
+  width: 80%;
+}
+
 .usr-img {
   width: 100%;
   border-radius: var(--card-border-radius);
