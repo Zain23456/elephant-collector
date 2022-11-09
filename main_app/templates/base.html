@@ -30,11 +30,15 @@
     </div>
     <nav>
       <ul>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'elephants_create' %}">Add Elephant</a></li>
-        <li><a href="{% url 'toys_create' %}">Add a Toy</a></li>
-        <li><a href="{% url 'toys_index' %}">All Toys</a></li>
-        <li><a href="{% url 'elephants_index' %}">All Elephants</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'elephants_index' %}">All Elephants</a></li>
+          <li><a href="{% url 'toys_index' %}">All Toys</a></li>
+          <li><a href="{% url 'elephants_create' %}">Add Elephant</a></li>
+          <li><a href="{% url 'toys_create' %}">Add a Toy</a></li>
+        {% else %}
+          <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'home' %}">Login</a></li>
+        {% endif %}
       </ul>
     </nav>
   </header>
