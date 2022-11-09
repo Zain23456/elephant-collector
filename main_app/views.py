@@ -5,10 +5,11 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Elephant, Toy
 from .forms import FeedingForm
 
-class ElephantCreate(CreateView):
+class ElephantCreate(CreateView, LoginRequiredMixin):
   model = Elephant
   # fields = '__all__'
   fields = ['name', 'description']
@@ -18,29 +19,29 @@ class ElephantCreate(CreateView):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
-class ElephantUpdate(UpdateView):
+class ElephantUpdate(UpdateView, LoginRequiredMixin):
   model = Elephant
   fields = ['description']
 
-class ElephantDelete(DeleteView):
+class ElephantDelete(DeleteView, LoginRequiredMixin):
   model = Elephant
   success_url = '/elephants/'
 
-class ToyCreate(CreateView):
+class ToyCreate(CreateView, LoginRequiredMixin):
   model = Toy
   fields = '__all__'
 
-class ToyList(ListView):
+class ToyList(ListView, LoginRequiredMixin):
   model = Toy
 
-class ToyDetail(DetailView):
+class ToyDetail(DetailView, LoginRequiredMixin):
   model = Toy
 
-class ToyUpdate(UpdateView):
+class ToyUpdate(UpdateView, LoginRequiredMixin):
   model = Toy
   fields = ['name', 'color']
 
-class ToyDelete(DeleteView):
+class ToyDelete(DeleteView, LoginRequiredMixin):
   model = Toy
   success_url = '/toys/'
 
