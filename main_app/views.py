@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from .models import Elephant, Toy
 from .forms import FeedingForm
 
@@ -50,16 +51,19 @@ class Home(LoginView):
 def about(request):
   return render(request, 'about.html')
 
+@login_required
 def elephants_index(request):
   elephants = request.user.elephant_set.all()
   return render(request, 'elephants/index.html', { 'elephants': elephants })
 
+@login_required
 def elephants_detail(request, elephant_id):
   elephant = Elephant.objects.get(id=elephant_id)
   toys_elephant_doesnt_have = Toy.objects.exclude(id__in = elephant.toys.all().values_list('id'))
   feeding_form = FeedingForm()
   return render(request, 'elephants/detail.html', { 'elephant': elephant, 'feeding_form': feeding_form, 'toys': toys_elephant_doesnt_have })
 
+@login_required
 def add_feeding(request, elephant_id):
   form = FeedingForm(request.POST)
   if form.is_valid():
@@ -68,6 +72,7 @@ def add_feeding(request, elephant_id):
     new_feeding.save()
   return redirect('elephants_detail', elephant_id=elephant_id)
 
+@login_required
 def assoc_toy(request, elephant_id, toy_id):
   Elephant.objects.get(id=elephant_id).toys.add(toy_id)
   return redirect('elephants_detail', elephant_id=elephant_id)
