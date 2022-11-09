@@ -51,7 +51,7 @@ def about(request):
   return render(request, 'about.html')
 
 def elephants_index(request):
-  elephants = Elephant.objects.all()
+  elephants = request.user.elephant_set.all()
   return render(request, 'elephants/index.html', { 'elephants': elephants })
 
 def elephants_detail(request, elephant_id):
