@@ -11,6 +11,10 @@ class ElephantCreate(CreateView):
   fields = ['name', 'description']
   success_url = '/elephants/'
 
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
 class ElephantUpdate(UpdateView):
   model = Elephant
   fields = ['description']
