@@ -112,4 +112,4 @@ def add_photo(request, elephant_id):
       photo.save()
     except Exception as err:
       print('An error occurred uploading file to S3: %s' % err)
-  return redirect('cats_detail', elephant_id=elephant_id)
+  return redirect('elephants_detail', elephant_id=elephant_id)

@@ -90,6 +90,7 @@
 
 .elephant-details h3 {
   margin: 20px 0 10px;
+  /* margin: 16px 0 10px 0; */
   font-size: var(--font-l);
 }
 
