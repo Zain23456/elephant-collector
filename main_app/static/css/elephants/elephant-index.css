@@ -12,6 +12,10 @@
   box-shadow: var(--card-box-shadow);
 }
 
+.card-img-container {
+  width: 300px;
+}
+
 .card-content {
   padding: 10px;
   width: 100%;

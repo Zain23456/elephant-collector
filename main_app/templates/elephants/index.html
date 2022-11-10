@@ -21,10 +21,19 @@
     <div class="card">
       <div class="card-content">
         <div class="card-img-container">
-          <img 
-            src="" 
-            alt="A skater boy"
-          >
+          {% if elephant.photo.url %}
+            <img 
+              src="{{ elephant.photo.url }}" 
+              alt="A photo of {{ elephant.name }}"
+              class="usr-img"
+            >
+          {% else %}
+            <img 
+              src="{% static 'images/logo-elephant.png' %}" 
+              alt="A cute elephant"
+              class="usr-img"
+            >
+          {% endif %}
         </div>
         <h2 class="card-title">{{ elephant.name }}</h2>
         <p><small>{{ elephant.description }}</small></p>
